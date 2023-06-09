@@ -72,14 +72,18 @@ h1 {
 
 .countryCard {
   width: 330px;
-  height: 400px;
+  height: 300px;
   text-align: center;
+  background-color: blueviolet;
+  padding-top: 1rem;
+  margin: 1rem ;
+  border: solid 1px aqua;
 }
 
 .flag {
   display: inline-block;
   height: 150px;
-  width: 150px;
+  width: 200px;
 }
 
 
