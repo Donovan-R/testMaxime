@@ -5,11 +5,11 @@ const urlAllCountries = 'https://restcountries.com/v3.1/all';
 export const Home = () => {
   const [countries, setCountries] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [pageCount, setPageCount] = useState(6);
 
   useEffect(() => {
     axios.get(urlAllCountries).then((response) => {
       setCountries(response.data);
-
       setIsLoading(false);
     });
   }, []);
@@ -17,11 +17,12 @@ export const Home = () => {
   if (isLoading || countries === null) return <h2>chargement en cours</h2>;
 
   return (
-    <section>
+    <section className='homeSection'>
       <div>
+        <h2>Countries around the world</h2>
         <div className='countriesSection'>
           {countries !== null &&
-            countries.map((country, index) => {
+            countries.slice(0, pageCount).map((country, index) => {
               return (
                 <article key={index} className='countryCard'>
                   <img
@@ -43,9 +44,13 @@ export const Home = () => {
               );
             })}
         </div>
-        {/* <h1>{post.name}</h1>
-        <p>{post.capital}</p> */}
       </div>
+      <button
+        className='showMoreBtn'
+        onClick={() => setPageCount(pageCount + 6)}
+      >
+        Show me more
+      </button>
     </section>
   );
 };
