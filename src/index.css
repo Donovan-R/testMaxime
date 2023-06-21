@@ -14,7 +14,7 @@
   -webkit-text-size-adjust: 100%;
 }
 
-.navBar{
+.navBar {
   width: 100vw;
   position: sticky;
   height: 100px;
@@ -26,34 +26,31 @@
   text-decoration: none;
 }
 
-.navBar ul{
+.navBar ul {
   display: flex;
   flex-direction: row;
-
 }
 
-.navBar li{
+.navBar li {
   padding-left: 1rem;
   list-style: none;
 }
 
-.navBar a{
+.navBar a {
   text-decoration: none;
   color: #1a1a1a;
-  
 }
 
-.active{
-  border-bottom: solid 2px black ;
+.active {
+  border-bottom: solid 2px black;
 }
-.section{
+.section {
   color: blueviolet;
   text-align: center;
 }
 
-
 body {
-font-family: 'Nunito', sans-serif;;
+  font-family: 'Nunito', sans-serif;
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
@@ -66,17 +63,28 @@ h1 {
 
 .countriesSection {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  justify-items: center;
+  place-items: center;
+}
+
+@media screen and (min-width: 550px) {
+  .countriesSection {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .countriesSection {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }
 
 .countryCard {
-  width: 330px;
-  height: 300px;
+  width: 80%;
+  height: 20rem;
   text-align: center;
   background-color: blueviolet;
   padding-top: 1rem;
-  margin: 1rem ;
+  margin: 1rem;
   border: solid 1px aqua;
 }
 
@@ -85,7 +93,6 @@ h1 {
   height: 150px;
   width: 200px;
 }
-
 
 button {
   border-radius: 8px;
@@ -105,5 +112,3 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
-
-

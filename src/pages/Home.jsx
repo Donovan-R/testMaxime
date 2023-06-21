@@ -19,7 +19,6 @@ export const Home = () => {
   return (
     <section>
       <div>
-        <h2>salut caïd</h2>
         <div className='countriesSection'>
           {countries !== null &&
             countries.map((country, index) => {
@@ -31,8 +30,15 @@ export const Home = () => {
                     alt={country.name}
                   />
                   <h3>{country.name.common}</h3>
-                  {console.log(country.languages)}
-                  {/* <h4>{country.languages}.map((language) => language.value)</h4>  */}
+                  {country.languages !== undefined && (
+                    <ul>
+                      {Object.values(country.languages).map(
+                        (language, index) => (
+                          <li key={index}>{language}</li>
+                        )
+                      )}
+                    </ul>
+                  )}
                 </article>
               );
             })}
