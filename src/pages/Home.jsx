@@ -1,50 +1,49 @@
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+const urlAllCountries = 'https://restcountries.com/v3.1/all';
 
-import { useState, useEffect } from "react"
-import axios from "axios"
-const urlAllCountries = 'https://restcountries.com/v3.1/all'
+export const Home = () => {
+  const [countries, setCountries] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-export const Home = ()=>{
-   const [countries, setCountries] = useState(null)
-   const [isLoading, setIsLoading ] = useState(true)
-
-   
-  
-
- useEffect(() => {
+  useEffect(() => {
     axios.get(urlAllCountries).then((response) => {
       setCountries(response.data);
-   
-      setIsLoading(false)
+
+      setIsLoading(false);
     });
   }, []);
 
   if (isLoading || countries === null) return <h2>chargement en cours</h2>;
 
   return (
-    <section >
-        <div>
-            <h2>salut caïd</h2>
-            <div className="countriesSection">
-                {countries !== null &&
-                    
-                countries.map((country, index)=>{      
-                    return (
-                    <article key={index} className='countryCard'>
-                    <img className="flag" src={country.flags.svg} alt={country.name} />
-                    <h3>{country.name.common}</h3>
-                    {console.log(country.languages)}
-                    {/* <h4>{country.languages}.map((language) => language.value)</h4>  */}
-                    </article>)
-                })}
-            </div>
+    <section>
+      <div>
+        <h2>salut caïd</h2>
+        <div className='countriesSection'>
+          {countries !== null &&
+            countries.map((country, index) => {
+              return (
+                <article key={index} className='countryCard'>
+                  <img
+                    className='flag'
+                    src={country.flags.svg}
+                    alt={country.name}
+                  />
+                  <h3>{country.name.common}</h3>
+                  {console.log(country.languages)}
+                  {/* <h4>{country.languages}.map((language) => language.value)</h4>  */}
+                </article>
+              );
+            })}
+        </div>
         {/* <h1>{post.name}</h1>
         <p>{post.capital}</p> */}
-        </div>
+      </div>
     </section>
   );
-}
+};
 
-   
 //    const getData = async () => {
 // 	const response = await axios.get(urlAllCountries);
 //     setCountries(response.data)
@@ -55,11 +54,11 @@ export const Home = ()=>{
 // useEffect(()=>{
 //  getData()
 // },[])
-   
+
 //    const getAllCountries = async ()=>{
 //         try {
 //            const res = await axios.get(urlAllCountries)
-//            const countriesGet = await res.data 
+//            const countriesGet = await res.data
 //            setCountries({...countriesGet})
 //             console.log(countries);
 //             setIsLoading(false)
