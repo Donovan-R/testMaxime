@@ -3,36 +3,52 @@ import axios from 'axios';
 const urlAllCountries = 'https://restcountries.com/v3.1/all';
 
 export const SearchPage = () => {
-  const [countries, setCountries] = useState(null);
-  //   const [filteredCountries, setFilteredCountries] = useState([]);
+  const [countries, setCountries] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchValue, setSearchValue] = useState('');
+  const newCountriesTab = [...countries];
 
+  const getAllCountries = async () => {
+    setIsLoading(true);
+    try {
+      axios.get(urlAllCountries).then((response) => {
+        setCountries(response.data);
+        setIsLoading(false);
+        // console.log(newCountriesTab.filter((country) =>
+        //   country.name.includes(searchValue.toLowerCase())));
+      });
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
   useEffect(() => {
-    axios.get(urlAllCountries).then((response) => {
-      setCountries(response.data);
-      //   setFilteredCountries(countries);
-      setIsLoading(false);
-    });
+    getAllCountries();
   }, []);
+
+  const handleChange = (e) =>{
+    setSearchValue(e.target.value);
+  }
+
+  const filterCountriesTab = newCountriesTab
+  // .filter((country)=>
+  //   country.name.includes(searchValue))
+  {filterCountriesTab.length >= 1 && console.log(newCountriesTab.filter((country)=>country.languages !== undefined && Object.values(country.languages).includes(searchValue)))}
 
   if (isLoading || countries === null) return <h2>chargement en cours</h2>;
 
   return (
     <section className='homeSection'>
       <div>
-        <h2
-          className='searchInput'
-          onChange={(e) => setSearchValue(e.target.value)}
-        >
+        <h2>
           Page de recherche
         </h2>
-        <input type='text' />
+        <input type='text' className='searchInput'
+          value={searchValue}
+          onChange={handleChange}/>
         <div className='countriesSection'>
-          {countries !== null &&
-            countries
-              //   .filter((country) => country.languages.includes(searchValue))
-              .map((country, index) => {
+          {filterCountriesTab.length >= 1 ?
+            filterCountriesTab.map((country, index) => {
+              
                 return (
                   <article key={index} className='countryCard'>
                     <img
@@ -52,7 +68,11 @@ export const SearchPage = () => {
                     )}
                   </article>
                 );
-              })}
+              }):
+          (
+                <h2>pas de résultats</h2>
+              )
+              }
         </div>
       </div>
     </section>
