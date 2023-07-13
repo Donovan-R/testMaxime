@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 const urlAllCountries = 'https://restcountries.com/v3.1/all';
 
 export const SearchPage = () => {
@@ -25,54 +26,64 @@ export const SearchPage = () => {
     getAllCountries();
   }, []);
 
-  const handleChange = (e) =>{
+  const handleChange = (e) => {
     setSearchValue(e.target.value);
-  }
+  };
 
-  const filterCountriesTab = newCountriesTab
-  // .filter((country)=>
-  //   country.name.includes(searchValue))
-  {filterCountriesTab.length >= 1 && console.log(newCountriesTab.filter((country)=>country.languages !== undefined && Object.values(country.languages).includes(searchValue)))}
+  const filterCountriesTab = newCountriesTab.filter((country) =>
+    country.name.common.toLowerCase().includes(searchValue.toLowerCase())
+  );
+
+  // {
+  //   filterCountriesTab.length >= 1 &&
+  //     console.log(
+  //       newCountriesTab.filter((country) =>
+  //         country.name.common.includes(searchValue)
+  //       )
+  //     );
+  // }
 
   if (isLoading || countries === null) return <h2>chargement en cours</h2>;
 
   return (
     <section className='homeSection'>
       <div>
-        <h2>
-          Page de recherche
-        </h2>
-        <input type='text' className='searchInput'
+        <h2>Page de recherche</h2>
+        <input
+          type='text'
+          className='searchInput'
           value={searchValue}
-          onChange={handleChange}/>
+          onChange={handleChange}
+          placeholder='Chercher un pays'
+        />
         <div className='countriesSection'>
-          {filterCountriesTab.length >= 1 ?
+          {filterCountriesTab.length >= 1 ? (
             filterCountriesTab.map((country, index) => {
-              
-                return (
-                  <article key={index} className='countryCard'>
+              return (
+                <article key={index} className='countryCard'>
+                  <Link to={country.maps.googleMaps} target='blank'>
                     <img
                       className='flag'
                       src={country.flags.svg}
                       alt={country.name}
                     />
                     <h3>{country.name.common}</h3>
-                    {country.languages !== undefined && (
-                      <ul>
-                        {Object.values(country.languages).map(
-                          (language, index) => (
-                            <li key={index}>{language}</li>
-                          )
-                        )}
-                      </ul>
-                    )}
-                  </article>
-                );
-              }):
-          (
-                <h2>pas de résultats</h2>
-              )
-              }
+                  </Link>
+                  {country.languages !== undefined && (
+                    <ul>
+                      {Object.values(country.languages).map(
+                        (language, index) => (
+                          <li key={index}>{language}</li>
+                        )
+                      )}
+                    </ul>
+                  )}
+                </article>
+              );
+            })
+          ) : (
+            <h2>pas de résultats</h2>
+          )}
         </div>
       </div>
     </section>

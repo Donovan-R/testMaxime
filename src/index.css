@@ -45,6 +45,11 @@
   border-bottom: solid 2px black;
 }
 
+.navLogo {
+  height: 5rem;
+  width: auto;
+}
+
 /* 
 page d'accueil
 */
@@ -95,6 +100,11 @@ h1 {
   overflow: hidden;
   border: solid 1px aqua;
   border-radius: 10%;
+}
+
+a {
+  text-decoration: none;
+  color: aliceblue;
 }
 
 .flag {

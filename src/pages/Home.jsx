@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+// import { RiSpeakLine } from 'react-icons/ri';
 const urlAllCountries = 'https://restcountries.com/v3.1/all';
 
 export const Home = () => {
@@ -25,17 +27,22 @@ export const Home = () => {
             countries.slice(0, pageCount).map((country, index) => {
               return (
                 <article key={index} className='countryCard'>
-                  <img
-                    className='flag'
-                    src={country.flags.svg}
-                    alt={country.name}
-                  />
-                  <h3>{country.name.common}</h3>
+                  <Link to={country.maps.googleMaps} target='blank'>
+                    <img
+                      className='flag'
+                      src={country.flags.svg}
+                      alt={country.name}
+                    />
+                    <h3>{country.name.common}</h3>
+                  </Link>
                   {country.languages !== undefined && (
                     <ul>
                       {Object.values(country.languages).map(
                         (language, index) => (
-                          <li key={index}>{language}</li>
+                          <li key={index}>
+                            {/* <RiSpeakLine /> */}
+                            {language}
+                          </li>
                         )
                       )}
                     </ul>
