@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Loading } from '../components/Loading';
+import { RiSpeakLine } from 'react-icons/ri';
 const urlAllCountries = 'https://restcountries.com/v3.1/all';
 
 export const SearchPage = () => {
@@ -68,7 +69,8 @@ export const SearchPage = () => {
 
                       {Object.values(country.languages).map(
                         (language, index) => (
-                          <li key={index}>{language}</li>
+                          <li key={index}><RiSpeakLine color='aquamarine'/>{" "}
+                          {language}</li>
                         )
                       )}
                     </ul>
