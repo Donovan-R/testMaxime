@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-// import { RiSpeakLine } from 'react-icons/ri';
+import { RiSpeakLine } from 'react-icons/ri';
+import { Loading } from '../components/Loading';
 const urlAllCountries = 'https://restcountries.com/v3.1/all';
 
 export const Home = () => {
@@ -9,14 +10,22 @@ export const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [pageCount, setPageCount] = useState(6);
 
+  const getAllCountries = async () => {
+    setIsLoading(true);
+    try {
+      axios.get(urlAllCountries).then((response) => {
+        setCountries(response.data);
+        setIsLoading(false);
+      });
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
   useEffect(() => {
-    axios.get(urlAllCountries).then((response) => {
-      setCountries(response.data);
-      setIsLoading(false);
-    });
+    getAllCountries();
   }, []);
 
-  if (isLoading || countries === null) return <h2>chargement en cours</h2>;
+  if (isLoading || countries === null) return <Loading/>;
 
   return (
     <section className='homeSection'>
@@ -40,7 +49,7 @@ export const Home = () => {
                       {Object.values(country.languages).map(
                         (language, index) => (
                           <li key={index}>
-                            {/* <RiSpeakLine /> */}
+                            <RiSpeakLine color='aquamarine'/>{" "}
                             {language}
                           </li>
                         )

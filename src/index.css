@@ -158,3 +158,9 @@ Error
 .errorSection{
   text-align: center;
 }
+
+.loadingSection{
+  display: grid;
+  place-items: center;
+  padding-top: 5rem;
+}

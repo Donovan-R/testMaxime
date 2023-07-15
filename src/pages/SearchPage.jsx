@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { Loading } from '../components/Loading';
 const urlAllCountries = 'https://restcountries.com/v3.1/all';
 
 export const SearchPage = () => {
@@ -15,8 +16,6 @@ export const SearchPage = () => {
       axios.get(urlAllCountries).then((response) => {
         setCountries(response.data);
         setIsLoading(false);
-        // console.log(newCountriesTab.filter((country) =>
-        //   country.name.includes(searchValue.toLowerCase())));
       });
     } catch (error) {
       console.log(error.response);
@@ -38,7 +37,7 @@ export const SearchPage = () => {
 
   
 
-  if (isLoading || countries === null) return <h2>chargement en cours</h2>;
+  if (isLoading || countries === null) return <Loading/>;
 
   return (
     <section className='homeSection'>
@@ -66,6 +65,7 @@ export const SearchPage = () => {
                   </Link>
                   {country.languages !== undefined && (
                     <ul>
+
                       {Object.values(country.languages).map(
                         (language, index) => (
                           <li key={index}>{language}</li>
