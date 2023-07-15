@@ -30,18 +30,13 @@ export const SearchPage = () => {
     setSearchValue(e.target.value);
   };
 
-  const filterCountriesTab = newCountriesTab.filter((country) =>
-    country.name.common.toLowerCase().includes(searchValue.toLowerCase())
-  );
+  // const filterCountriesTab = newCountriesTab.filter((country) =>
+  //   country.name.common.toLowerCase().includes(searchValue.toLowerCase())
+  // );
 
-  // {
-  //   filterCountriesTab.length >= 1 &&
-  //     console.log(
-  //       newCountriesTab.filter((country) =>
-  //         country.name.common.includes(searchValue)
-  //       )
-  //     );
-  // }
+  const filterCountriesByLanguages = newCountriesTab.filter((country)=>country.languages !== undefined && Object.values(country.languages).toString().toLowerCase().includes(searchValue.toLowerCase()))
+
+  
 
   if (isLoading || countries === null) return <h2>chargement en cours</h2>;
 
@@ -54,11 +49,11 @@ export const SearchPage = () => {
           className='searchInput'
           value={searchValue}
           onChange={handleChange}
-          placeholder='Chercher un pays'
+          placeholder='Chercher une langue'
         />
         <div className='countriesSection'>
-          {filterCountriesTab.length >= 1 ? (
-            filterCountriesTab.map((country, index) => {
+          {filterCountriesByLanguages.length >= 1 ? (
+            filterCountriesByLanguages.map((country, index) => {
               return (
                 <article key={index} className='countryCard'>
                   <Link to={country.maps.googleMaps} target='blank'>

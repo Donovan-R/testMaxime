@@ -150,3 +150,11 @@ button:focus-visible {
 .showMoreBtn {
   text-align: center;
 }
+
+/*
+Error
+*/
+
+.errorSection{
+  text-align: center;
+}

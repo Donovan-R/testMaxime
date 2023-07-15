@@ -61,27 +61,3 @@ export const Home = () => {
     </section>
   );
 };
-
-//    const getData = async () => {
-// 	const response = await axios.get(urlAllCountries);
-//     setCountries(response.data)
-//     console.log(countries[0]);
-//     setIsLoading(false)
-// };
-
-// useEffect(()=>{
-//  getData()
-// },[])
-
-//    const getAllCountries = async ()=>{
-//         try {
-//            const res = await axios.get(urlAllCountries)
-//            const countriesGet = await res.data
-//            setCountries({...countriesGet})
-//             console.log(countries);
-//             setIsLoading(false)
-//         } catch (error) {
-//             console.log(error);
-//         }
-//    }
-//   getAllCountries()
