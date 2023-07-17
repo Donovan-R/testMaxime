@@ -44,7 +44,7 @@ export const Home = () => {
                     />
                     <h3>{country.name.common}</h3>
                   </Link>
-                  {country.languages !== undefined && (
+                  {(country.languages !== undefined) ? (
                     <ul>
                       {Object.values(country.languages).map(
                         (language, index) => (
@@ -54,8 +54,11 @@ export const Home = () => {
                           </li>
                         )
                       )}
-                    </ul>
-                  )}
+                    </ul> 
+                  ) : (
+                    <h3>no languages found</h3>
+                  )
+                }
                 </article>
               );
             })}

@@ -52,7 +52,34 @@ export const SearchPage = () => {
           placeholder='Chercher une langue'
         />
         <div className='countriesSection'>
-          {filterCountriesByLanguages.length >= 1 ? (
+          {!searchValue ? newCountriesTab.map((country, index) => {
+              return (
+                <article key={index} className='countryCard'>
+                  <Link to={country.maps.googleMaps} target='blank'>
+                    <img
+                      className='flag'
+                      src={country.flags.svg}
+                      alt={country.name}
+                    />
+                    <h3>{country.name.common}</h3>
+                  </Link>
+                  {(country.languages !== undefined) ? (
+                    <ul>
+                      {Object.values(country.languages).map(
+                        (language, index) => (
+                          <li key={index}>
+                            <RiSpeakLine color='aquamarine'/>{" "}
+                            {language}
+                          </li>
+                        )
+                      )}
+                    </ul> 
+                  ) : (
+                    <h3>no languages found</h3>
+                  )
+                }
+                </article>
+          )})  : filterCountriesByLanguages.length >= 1 ? (
             filterCountriesByLanguages.map((country, index) => {
               return (
                 <article key={index} className='countryCard'>
@@ -64,17 +91,21 @@ export const SearchPage = () => {
                     />
                     <h3>{country.name.common}</h3>
                   </Link>
-                  {country.languages !== undefined && (
+                  {(country.languages !== undefined) ? (
                     <ul>
-
                       {Object.values(country.languages).map(
                         (language, index) => (
-                          <li key={index}><RiSpeakLine color='aquamarine'/>{" "}
-                          {language}</li>
+                          <li key={index}>
+                            <RiSpeakLine color='aquamarine'/>{" "}
+                            {language}
+                          </li>
                         )
                       )}
-                    </ul>
-                  )}
+                    </ul> 
+                  ) : (
+                    <h3>no languages found</h3>
+                  )
+                }
                 </article>
               );
             })
