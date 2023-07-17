@@ -14,26 +14,65 @@
   -webkit-text-size-adjust: 100%;
 }
 
+/*
+Buttons
+*/
+
+button {
+  border-radius: 8px;
+  border: 2px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: aquamarine;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  margin-bottom: 1rem;
+  color: black;
+  text-transform: capitalize;
+  transition: all 1s linear;
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.showMoreBtn {
+  text-align: center;
+}
+.showMoreBtn:hover {
+  border-color: blueviolet;
+  background-color: #1a1a1a;
+  color: aqua;
+}
+
 .navBar {
   width: 100vw;
   position: sticky;
-  height: 100px;
+  height: auto;
+
   background-color: aqua;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
   top: 0;
   text-decoration: none;
+  padding: 0.5rem 0;
 }
 
-.navBar ul {
-  display: flex;
-  flex-direction: row;
+.navBar li{
+  font-size: 1.5em;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-.navBar li {
+
+.bigNav li {
   padding-left: 1rem;
   list-style: none;
+}
+
+.bigNav ul {
+  display: flex;
+  flex-direction: row;
 }
 
 .navBar a {
@@ -48,6 +87,55 @@
 .navLogo {
   height: 5rem;
   width: auto;
+}
+
+.bigNav{
+  display: none;
+  visibility: hidden;
+}
+
+.smallNav{
+  position: absolute;
+  right: 0;
+  padding-right: 2rem;
+  display: grid;
+  align-items: center;
+  top: 0;
+  height: 110px;
+
+}
+
+.navToggle{
+  border: none;
+  background-color: transparent;
+  color: black;
+  padding: 0;
+  margin: 0;
+  font-size: 2rem;
+
+}
+
+.sideNav{
+  padding-left: 1rem;
+ 
+}
+
+
+
+@media screen and (min-width: 600px) {
+  .navBar{
+    display: flex;
+    justify-content: space-around;
+  }
+ 
+  .bigNav{
+    display: flex;
+    visibility: visible;
+  }
+  .smallNav, .sideNav{
+    visibility: hidden;
+    display: none;
+  }
 }
 
 /* 
@@ -118,38 +206,7 @@ ul {
   text-align: justify;
 }
 
-/*
-Buttons
-*/
 
-button {
-  border-radius: 8px;
-  border: 2px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: aquamarine;
-  cursor: pointer;
-  transition: border-color 0.25s;
-  margin-bottom: 1rem;
-  color: black;
-  text-transform: capitalize;
-  transition: all 1s linear;
-}
-button:hover {
-  border-color: blueviolet;
-  background-color: #1a1a1a;
-  color: aqua;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-.showMoreBtn {
-  text-align: center;
-}
 
 /*
 Error
